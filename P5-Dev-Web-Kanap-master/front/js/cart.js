@@ -76,7 +76,6 @@ for(let l = 0; l <  btnsuprimer.length; l++){
 //---------la quantité de panier------------------
 //Qauntité :afficher les quantité de structeur 
 
-
 //-------------le montant total de panier----------- 
 //declaration de la variable pour pouvoir ymettre les prix qui sont present dans le panier 
 
