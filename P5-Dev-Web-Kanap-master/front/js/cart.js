@@ -100,6 +100,7 @@ const affichagHTML = `
 <span id="totalPrice">${prixTotal}</span>
 
 `
+document.getElementById("totalQuantity").innerText = panier.length;
 //afficher le total
 totalPrice.insertAdjacentHTML("beforeend",affichagHTML);
 

@@ -12,5 +12,3 @@ positionElement5.innerHTML = `
 <p>Commande validée ! <br>Votre numéro de commande est : <span id="orderId">${responseId}</span></p>
 </div>`;
 
-//injection HTML 
-//positionElement5.insertAdjacentHTML("afterbegin", structeurConfirmationCommande);
