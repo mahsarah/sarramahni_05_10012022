@@ -68,13 +68,22 @@ ajoutPanier = () => {
             console.log(panier);
             if(panier) { // le panier existe.
                 // vERIFIEZ QUE LE PRODUIT EXISTE DÉJA DANS LE PANIER
-                panier.forEach(produit => {
-                    console.log(color);
+                let value = panier.filter(item => item.id === produitData._id && item.color === color);
+
+
+                if(value.length != 0){
+                    panier.forEach(produit => {
+                          console.log(color);
                     if(produit.id == produitData._id) {
                         if( produit.color == color) {
                             // Augmenter la quantité du produit.
-                            produit.qty += qty;
-                        } else { // couleur n'est pas même
+
+                            produit.qty += Number(qty);
+                        }
+                    }
+                });   
+
+                } else { // couleur n'est pas même
                            
                             produit = {
                                 id: produitData._id,
@@ -88,21 +97,6 @@ ajoutPanier = () => {
 
                             panier.push(produit);
                         }
-    
-                    } else {
-                        
-                        let produit = {
-                            id: produitData._id,
-                            name: produitData.name,
-                            price: produitData.price*qty,
-                            qty: qty,
-                            color: color,
-                            imageUrl: produitData.imageUrl,
-                            altText: produitData.altTxt
-                        }
-                        panier.push(produit);
-                    }
-                });
 
                //la trosformation en format json et l'envoyer dans la keys "produit" du localstorage
                 localStorage.setItem("panier", JSON.stringify(panier));

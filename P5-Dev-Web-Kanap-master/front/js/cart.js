@@ -270,49 +270,6 @@ products,
 console.log("envoyer");
 console.log(envoyer);
 
-/*let productsBought = [];
-productsBought.push(panier);
-
-const order = {
-  contact: {
-    firstName: inputName.value,
-    lastName: inputLastName.value,
-    city: inputCity.value,
-    address: inputAdress.value,
-    email: inputMail.value,
-  },
-  products: productsBought,
-};
-//envouer l'objet "envoyer" dans le serveur 
-const options = {
-  method: "POST",
-  body: JSON.stringify(order),
-  headers: { "Content-Type": "application/json" },
-};
-
- // Préparation du prix formaté pour l'afficher sur la prochaine page
- let priceConfirmation = document.querySelector("#totalPrice").innerText;
- priceConfirmation = priceConfirmation.split(" :");
- console.log( "priceConfirmation");
- console.log( priceConfirmation);
- 
-
- // Envoie de la requête avec l'en-tête. On changera de page avec un localStorage qui ne contiendra plus que l'order id et le prix.
- fetch("http://localhost:3000/api/products/order",options)
- .then((response) => response.json())
- .then((produitData) => {
-  localStorage.setItem("orderId", produitData.orderId);
-  localStorage.setItem("prixTotal", priceConfirmation[1]);
-
-
-   //  On peut commenter cette ligne pour vérifier le statut 201 de la requête fetch. Le fait de préciser la destination du lien ici et non dans la balise <a> du HTML permet d'avoir le temps de placer les éléments comme l'orderId dans le localStorage avant le changement de page.
-   //document.location.href = "confirmation.html";
- })
-
- .catch((err) => {
-  alert("Il y a eu une erreur : " + err);
-});
-*/
 const promise01 = fetch("http://localhost:3000/api/products/order",{
 method: "POST",
 body: JSON.stringify(envoyer),
@@ -362,11 +319,11 @@ const dataLocalStorage = localStorage.getItem("formulairValues");
 const dataLocalStorageObjet = JSON.parse(dataLocalStorage);
 
 //Metre les values du localStorage dans les champs du formulaire 
-document.querySelector("#firstName").value = dataLocalStorageObjet.Prenom;
-document.querySelector("#lastName").value = dataLocalStorageObjet.Nom;
-document.querySelector("#address").value = dataLocalStorageObjet.Adresse;
-document.querySelector("#city").value = dataLocalStorageObjet.Ville;
-document.querySelector("#email").value = dataLocalStorageObjet.Email;
+document.querySelector("#firstName").value = dataLocalStorageObjet.firstName;
+document.querySelector("#lastName").value = dataLocalStorageObjet.lastName;
+document.querySelector("#address").value = dataLocalStorageObjet.address;
+document.querySelector("#city").value = dataLocalStorageObjet.city;
+document.querySelector("#email").value = dataLocalStorageObjet.email;
 
 
 console.log(" dataLocalStorageObjet");
