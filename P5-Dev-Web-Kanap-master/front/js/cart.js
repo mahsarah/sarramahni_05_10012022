@@ -33,7 +33,7 @@ if(panier === null ){
         <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${panier[k].qty}">
       </div>
       <div class="cart__item__content__settings__delete">
-        <p class="deleteItem">Supprimer</p>
+        <p class="deleteItem" data-color="${panier[k].color}" >Supprimer</p>
       </div>
     </div>
       </div>
@@ -60,8 +60,9 @@ for(let l = 0; l <  btnsuprimer.length; l++){
  let id_selection_suprission = panier[l].id;
  console.log("id_selection_suprission");
  console.log(id_selection_suprission);
+ console.log(btnsuprimer[l].dataset.color);
  //avec la methode filtre je sélectionne les element a garder et je suprime l'element ou le btn suppr a ete clique 
-      panier = panier.filter(el => el.id !==  id_selection_suprission);
+      panier = panier.filter(el => el.id !==  id_selection_suprission ||(el.id === id_selection_suprission && el.color !==  btnsuprimer[l].dataset.color));
       console.log(panier);
       //envoi la variable dans le locale storage 
       //la trosformation en format json et l'envoyer dans la keys "produit" du localstorage
@@ -73,21 +74,21 @@ for(let l = 0; l <  btnsuprimer.length; l++){
   })
 
 }
-//---------la quantité de panier------------------
-//Qauntité :afficher les quantité de structeur 
+
 
 //-------------le montant total de panier----------- 
 //declaration de la variable pour pouvoir ymettre les prix qui sont present dans le panier 
 
 let prixTotalCalcul = [] ; 
 totalPrice = document.querySelector("#totalPrice");
+let quantite = 0;
 //aler chercher les prix dans le panier 
 for(m = 0 ; m < panier.length; m++ ){
-  let prixProduitPnier = panier[m].price;
+  let prixProduitPnier = Number(panier[m].price * panier[m].qty);
   //metre les prix du panier dans la variable prixTotalCalcul 
   prixTotalCalcul.push( prixProduitPnier)
 console.log( prixTotalCalcul);
-
+quantite += Number(panier[m].qty);
 }
 //additionner les prix q'il yas dans le tableau de la variable "prixTotalCalcul" avec la methode reduce
 
@@ -100,7 +101,7 @@ const affichagHTML = `
 <span id="totalPrice">${prixTotal}</span>
 
 `
-document.getElementById("totalQuantity").innerText = panier.length;
+document.getElementById("totalQuantity").innerText = quantite;
 //afficher le total
 totalPrice.insertAdjacentHTML("beforeend",affichagHTML);
 
@@ -194,7 +195,7 @@ function villControle(){
 
   
 function EmailControle(){
-  //Control de la validité de prenom
+  //Control de la validité de email
   const leEmail = formulairValues.Email;
   if(regEmail( leEmail)){
     document.querySelector("#emailErrorMsg").textContent = "";
@@ -208,7 +209,7 @@ function EmailControle(){
 
   
 function AdressControle(){
-  //Control de la validité de prenom
+  //Control de la validité de adress
   const ladress = formulairValues.Adresse;
   if(regAdress(ladress )){
     document.querySelector("#addressErrorMsg").textContent = "";
@@ -220,11 +221,11 @@ function AdressControle(){
   }
  };
 
-let form = null
+
 //------------Fin Gestion de validation de formulaire-----------------
 if( prenomControle() && nomControle() && villControle() && EmailControle() && AdressControle() ){
 //metre formulair objet "formulairValues" dans le local storage 
-form = {
+/*form = {
   firstName:  document.querySelector("#firstName").value,
   lastName: document.querySelector("#lastName").value,
   address: document.querySelector("#address").value,
@@ -232,12 +233,12 @@ form = {
   email: document.querySelector("#email").value ,
    };
    console.log(form)
-localStorage.setItem("formulairValues",JSON.stringify(form));
+localStorage.setItem("formulairValues",JSON.stringify(form));*/
 
 //envoyerverserveur(envoyer);
-}else{
+/*}else{
   alert("Veuillez bien remplire le formulaire");
-}
+}*/
 /*
 let listId = panier.map(produit => produit.id);
 console.log(listId);*/
@@ -254,11 +255,11 @@ products.push(productsId);
 };
 
 contact = {
-  firstName : "test",
-  lastName : "test",
-  address : "test",
-  city : "test",
-  email : "test@test.com",
+  firstName : "formulairValues.Prenom",
+  lastName : " formulairValues.Nom",
+  address : " formulairValues.Adresse",
+  city : " formulairValues.Ville",
+  email : "formulairValues.Email",
 } ;
 //products = ["055743915a544fde83cfdfc904935ee7"] ;
 
@@ -285,7 +286,7 @@ promise01.then(async(response)=>{
 
 try{
 const contenu = await response.json();
-console.log("contenu a choidir");
+console.log("contenu a choisir");
 console.log(contenu);
 if(response.ok){
 console.log(`Resultas de response.ok: ${response.ok}`);
@@ -295,10 +296,10 @@ console.log(contenu.orderId);
 //Metre le id dans locale storage
 localStorage.setItem("responseId",contenu.orderId);
 //aller vers la page confirmation
-document.location.href = "confirmation.html";
+document.location.href = "confirmation.html?id=" + contenu.orderId;
 }else{
 console.log(`response de serveur : ${response.status}`);
-alert(`prbleme avec le serveur :erreur ${response.status}`);
+alert(`probleme avec le serveur :erreur ${response.status}`);
 }
 }catch(e){
   console.log("ERRUR qui vien de catch()");
@@ -307,12 +308,14 @@ alert(`prbleme avec le serveur :erreur ${response.status}`);
 }
 })
 
-
+}else{
+  alert("veuillez bien remplire le formulaire");
+}
 });
  
 //----------Mettre le contenu du localStorage dans les champs du formulaire ----------------
 //prendre la key dans le localStorage et la mettre dans une variable 
-
+/*
 const dataLocalStorage = localStorage.getItem("formulairValues");
 
 //convertir la chaine de caracter en objet javascript
@@ -329,7 +332,7 @@ document.querySelector("#email").value = dataLocalStorageObjet.email;
 console.log(" dataLocalStorageObjet");
 console.log( dataLocalStorageObjet);
 
-
+*/
 
 
 
