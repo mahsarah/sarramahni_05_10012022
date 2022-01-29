@@ -84,7 +84,7 @@ totalPrice = document.querySelector("#totalPrice");
 let quantite = 0;
 //aler chercher les prix dans le panier 
 for(m = 0 ; m < panier.length; m++ ){
-  let prixProduitPnier = Number(panier[m].price * panier[m].qty);
+  let prixProduitPnier = Number(panier[m].price );
   //metre les prix du panier dans la variable prixTotalCalcul 
   prixTotalCalcul.push( prixProduitPnier)
 console.log( prixTotalCalcul);
