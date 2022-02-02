@@ -1,12 +1,4 @@
-/*async function getData ()  {
-    let response = await fetch('http://localhost:3000/api/products/');
-    let data = await response.json();
-    console.log(data);
-}
- 
 
-
-getData();*/
 
 let meubleData = [] ;
 
