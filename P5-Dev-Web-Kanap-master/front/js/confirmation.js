@@ -1,7 +1,6 @@
 
 //recuperation de l'id de la commande (provenant du serveur) dans local storage
-//const responseId = localStorage.getItem("responseId");
-//console.log(`responseId : ${responseId}`);
+
 const id = window.location.search.split("?id=").join("");
 console.log(id);
 

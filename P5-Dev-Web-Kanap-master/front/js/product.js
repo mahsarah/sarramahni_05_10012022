@@ -56,11 +56,11 @@ ajoutPanier = () => {
         let qty = parseInt(document.getElementById("quantity").value,10);
         let color = document.getElementById("colors").value;
         
-        console.log(qty, color);
+       // console.log(qty, color);
           
 
         if(checkQuantityK(qty) && color) {
-            console.log("Tout se passe ici");
+           // console.log("Tout se passe ici");
 
             // Verifier que un pnaier existe dans le localStoarge
             let panier = JSON.parse(localStorage.getItem("panier"));
@@ -73,7 +73,7 @@ ajoutPanier = () => {
 
                 if(value.length != 0){
                     panier.forEach(produit => {
-                          console.log(color);
+                         // console.log(color);
                     if(produit.id == produitData._id) {
                         if( produit.color == color) {
                             // Augmenter la quantité du produit.

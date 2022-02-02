@@ -84,7 +84,7 @@ totalPrice = document.querySelector("#totalPrice");
 let quantite = 0;
 //aler chercher les prix dans le panier 
 for(m = 0 ; m < panier.length; m++ ){
-  let prixProduitPnier = Number(panier[m].price );
+  let prixProduitPnier = Number(panier[m].price*panier[m].qty);
   //metre les prix du panier dans la variable prixTotalCalcul 
   prixTotalCalcul.push( prixProduitPnier)
 console.log( prixTotalCalcul);
@@ -225,28 +225,7 @@ function AdressControle(){
 //------------Fin Gestion de validation de formulaire-----------------
 if( prenomControle() && nomControle() && villControle() && EmailControle() && AdressControle() ){
 //metre formulair objet "formulairValues" dans le local storage 
-/*form = {
-  firstName:  document.querySelector("#firstName").value,
-  lastName: document.querySelector("#lastName").value,
-  address: document.querySelector("#address").value,
-  city: document.querySelector("#city").value,
-  email: document.querySelector("#email").value ,
-   };
-   console.log(form)
-localStorage.setItem("formulairValues",JSON.stringify(form));*/
 
-//envoyerverserveur(envoyer);
-/*}else{
-  alert("Veuillez bien remplire le formulaire");
-}*/
-/*
-let listId = panier.map(produit => produit.id);
-console.log(listId);*/
-//metre les values du formulaire et mettre les produits sélectionnés dans un objet a envoyer vers le server 
-//const envoyer = {
-  // panier,
-  //formulairValues,
-//}
 //product y metre l'id ou les id des produit dedans dans le backend 
 let products = [];
 for (o = 0 ; o < panier.length; o++){
@@ -313,26 +292,7 @@ alert(`probleme avec le serveur :erreur ${response.status}`);
 }
 });
  
-//----------Mettre le contenu du localStorage dans les champs du formulaire ----------------
-//prendre la key dans le localStorage et la mettre dans une variable 
-/*
-const dataLocalStorage = localStorage.getItem("formulairValues");
 
-//convertir la chaine de caracter en objet javascript
-const dataLocalStorageObjet = JSON.parse(dataLocalStorage);
-
-//Metre les values du localStorage dans les champs du formulaire 
-document.querySelector("#firstName").value = dataLocalStorageObjet.firstName;
-document.querySelector("#lastName").value = dataLocalStorageObjet.lastName;
-document.querySelector("#address").value = dataLocalStorageObjet.address;
-document.querySelector("#city").value = dataLocalStorageObjet.city;
-document.querySelector("#email").value = dataLocalStorageObjet.email;
-
-
-console.log(" dataLocalStorageObjet");
-console.log( dataLocalStorageObjet);
-
-*/
 
 
 
